@@ -113,6 +113,10 @@ const router = new VueRouter.createRouter({
                     path: '',
                     component: ()=>  import('./pages/auth/login.vue')
                 },
+                {
+                    path: 'register',
+                    component: ()=>  import('./pages/auth/register.vue')
+                },
             ]
         },
     ]
