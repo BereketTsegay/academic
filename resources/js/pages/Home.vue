@@ -14,13 +14,13 @@
                 <a class="px-4" href="#services">Vission</a>
                 <a class="px-4" href="#stats">Mission</a>
             </div>
-            
-                <button 
+
+                <button
                     @click="$router.push('/auth')"
-                    class="cursor-pointer focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"">
+                    class="cursor-pointer focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                     login
                 </button>
-           
+
         </div>
     </header>
 
@@ -1052,3 +1052,14 @@
 
 </div>
 </template>
+
+<script>
+export default {
+    name : "Home",
+    data() {
+        return {
+
+        }
+    },
+}
+</script>
