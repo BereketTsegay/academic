@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRegister;
+use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -12,10 +15,10 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api', ['except' => ['login','register']]);
+    // }
 
     /**
      * Get a JWT via given credentials.
@@ -26,7 +29,7 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth('api')->attempt($credentials)) {
+        if (! $token = auth('api')->attempt($credentials,request(['remember']))) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -66,7 +69,18 @@ class AuthController extends Controller
     }
 
     public function register(UserRegister $request)  {
-        
+
+        $user = new User();
+        $user->status = 'active';
+        $user->fill($request->validated());
+        $user->save();
+
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        $this->respondWithToken(auth('api')->user());
     }
     /**
      * Get the token array structure.

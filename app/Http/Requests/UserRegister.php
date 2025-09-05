@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -25,10 +26,9 @@ class UserRegister extends FormRequest
         return [
             'name' => ['required','string'],
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed'],
             'gender' =>'required',
             'tele' => 'required|numeric',
-            'status' => 'required',
             'address' => 'required'
         ];
     }

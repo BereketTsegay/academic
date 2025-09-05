@@ -20,6 +20,9 @@ Route::prefix('auth')->controller(AuthController::class)->group(function ($route
     Route::post('login', 'login');
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
+    Route::post('register', 'register');
     Route::post('me', 'me');
     //--------------------------------other routes
 })->middleware('api');
+
+

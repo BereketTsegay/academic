@@ -1,6 +1,4 @@
 <template>
-  <!-- credit: https://github.com/codebushi/gatsby-starter-lander -->
-
 <div>
 
 
@@ -23,7 +21,7 @@
 
         </div>
     </header>
-
+    
     <main class="text-gray-900">
 
 
@@ -1049,7 +1047,7 @@
         </div>
     </footer>
 
-
+ this is home
 </div>
 </template>
 

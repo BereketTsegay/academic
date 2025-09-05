@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '5aaad27c5f5d882fdee1cc0c06406f0a5e68af01',
+        'reference' => 'ecb68d765459d8f1479cab70227bb6bd48231975',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -427,7 +427,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '5aaad27c5f5d882fdee1cc0c06406f0a5e68af01',
+            'reference' => 'ecb68d765459d8f1479cab70227bb6bd48231975',
             'dev_requirement' => false,
         ),
         'laravel/pail' => array(
@@ -465,6 +465,15 @@
             'aliases' => array(),
             'reference' => '019a2933ff4a9199f098d4259713f9bc266a874e',
             'dev_requirement' => true,
+        ),
+        'laravel/sanctum' => array(
+            'pretty_version' => 'v4.2.0',
+            'version' => '4.2.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/sanctum',
+            'aliases' => array(),
+            'reference' => 'fd6df4f79f48a72992e8d29a9c0ee25422a0d677',
+            'dev_requirement' => false,
         ),
         'laravel/serializable-closure' => array(
             'pretty_version' => 'v2.0.4',
