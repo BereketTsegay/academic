@@ -78,9 +78,14 @@ class AuthController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
+       $credentials = request(['email', 'password']);
 
-        $this->respondWithToken(auth('api')->user());
+        if (! $token = auth('api')->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return $this->respondWithToken($token);
+
     }
     /**
      * Get the token array structure.
