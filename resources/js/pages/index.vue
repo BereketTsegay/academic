@@ -20,9 +20,13 @@
 <script>
 import navigation from "./partials/header.vue";
 import sidenav from "./partials/sidenav.vue";
+import { initFlowbite } from "flowbite";
 export default {
     components:{
         navigation, sidenav
+    },
+    mounted() {
+            initFlowbite();
     }
 }
 </script>

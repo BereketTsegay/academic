@@ -147,6 +147,7 @@
 </template>
 <script>
 import Alert from '../../components/alert.vue';
+import { setAuthorization } from '../../library/general';
 
 export default {
     name: 'register',
@@ -166,8 +167,10 @@ export default {
             this.message = null;
            axios.post('/api/auth/register',this.user)
            .then(res => {
-                this.$store.commit('login',res.data);
-                this.$router.push('/dashboard');
+                this.$store.commit("loginSuccess", res.data);
+                setAuthorization(res.data.access_token);
+
+                this.$router.push('/academia');
            })
            .catch(err => {
                 this.errors = err.response.data.errors;
