@@ -26,7 +26,7 @@
                         <a href="/user/settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
                         </li>
                         <li class="border-t-1 border-gray-700 dark:border-gray-600">
-                        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" @click.prevent="logout" role="menuitem">Sign out</a>
+                        <a class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" @click.prevent="logout" role="menuitem">Sign out</a>
                         </li>
                     </ul>
                 </div>
@@ -34,6 +34,12 @@
 </template>
 <script>
 export default {
+    methods: {
+        logout(){
+            this.$store.commit('logout');
+            this.$router.push('/');
+        }
+    },
     computed:{
         currentUser(){
             return this.$store.getters.currentUser;

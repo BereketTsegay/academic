@@ -9,7 +9,7 @@
               <form @submit.prevent="authenticate" class="flex flex-col gap-6">
                     <div class="grid grid-cols-2 gap-4">
                         <div class="grid gap-2">
-                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <!-- <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Full Name
                             </label>
                             <div>
@@ -23,58 +23,18 @@
                             </div>
                              <p v-show="!!errors.name?.length" class="text-sm text-red-600 dark:text-red-500">
                                 <span v-for="error,index in errors.name" :key="index">{{ error }}</span>
-                            </p>
+                            </p> -->
+                            <InputField :errors="errors.name" label="Full Name" type="text" placeholder="Full Name" :modelValue="user.name??''" icon="i-cursor" @input="($event)=> user.name = $event.target.value" />
                         </div>
                         <div class="grid gap-2">
-                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Email
-                            </label>
-                            <div>
-                                <input
-                                v-model="user.email"
-                                type="email"
-                                placeholder="Email"
-                                :class="{'border-red-600 text-red-600 dark:border-red-600 dark:text-red' : !!errors.email?.length , 'border-gray-300 text-gray-900 dark:border-gray-600 dark:text-white' : !!errors.email?.length <= 0}"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                />
-
-                            </div>
-                             <p v-show="!!errors.email?.length" class="text-sm text-red-600 dark:text-red-500">
-                                <span v-for="error,index in errors.email" :key="index">{{ error }}</span>
-                            </p>
+                            <InputField :errors="errors.email" label="Email" type="email" placeholder="Youremail@domain.com" :modelValue="user.email??''" icon="at" @input="($event)=> user.email = $event.target.value" />
                         </div>
                         <div class="grid gap-2">
-                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Telephone
-                            </label>
-                            <div>
-                                <input
-                                v-model="user.tele"
-                                placeholder="Telephone"
-                                :class="{'border-red-600 text-red-600 dark:border-red-600 dark:text-red' : !!errors.tele?.length , 'border-gray-300 text-gray-900 dark:border-gray-600 dark:text-white' : errors.tele?.length <= 0}"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                />
-                            </div>
-                            <p v-show="!!errors.tele?.length" class="text-sm text-red-600 dark:text-red-500">
-                                <span v-for="error,index in errors.email" :key="index">{{ error }}</span>
-                            </p>
+                            <InputField :errors="errors.tele" label="tele" type="tel" placeholder="Telephon" :modelValue="user.tele??''" icon="phone" @input="($event)=> user.tele = $event.target.value" />
                         </div>
                         <div class="grid gap-2">
-                        <label for="gender" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Gender
-                            </label>
-                            <div>
-                                <select id="gender" placeholder="Select Gender" v-model="user.gender"
-                                :class="{'border-red-600 text-red-600 dark:border-red-600 dark:text-red' : !!errors.gender?.length , 'border-gray-300 text-gray-900 dark:border-gray-600 dark:text-white' : errors.gender?.length <= 0}"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected>Select gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Famale">Female</option>
-                                </select>
-                            </div>
-                            <p v-show="!!errors.gender?.length" class="text-sm text-red-600 dark:text-red-500">
-                                <span v-for="error,index in errors.email" :key="index">{{ error }}</span>
-                            </p>
+                        <SelectField :errors="errors.gender" label="Gender" :options="genderOptions"
+                        placeholder="Telephon" :modelValue="user.gender??''" icon="venus-mars" @input="($event)=> user.gender = $event.target.value"/>
                         </div>
                         <div class="grid col-span-2 gap-2">
                         <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -90,46 +50,13 @@
                             </p>
                         </div>
 
+                      
                         <div class="grid gap-2">
-                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Password
-                            </label>
-                            <div>
-                                <input
-                                v-model="user.password"
-                                type="password"
-                                placeholder="password"
-                                :class="{'border-red-600 text-red-600 dark:border-red-600 dark:text-red' : !!errors.password?.length , 'border-gray-300 text-gray-900 dark:border-gray-600 dark:text-white' : !!errors.password?.length <= 0}"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                />
-                            </div>
-                            <p v-show="!!errors.password?.length" class="text-sm text-red-600 dark:text-red-500">
-                                <span v-for="error,index in errors.email" :key="index">{{ error }}</span>
-                            </p>
+                            <InputField :errors="errors.password" label="Password" type="password" placeholder="Password" :modelValue="user.password??''" icon="lock" @input="($event)=> user.password = $event.target.value" />
                         </div>
                         <div class="grid gap-2">
-                        <label for="password_confirmation"
-
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Confrim Password
-                            </label>
-                            <div>
-                                <input
-                                v-model="user.password_confirmation"
-                                id="password_confirmation"
-                                type="password"
-                                placeholder="Confirm password"
-                                 :class="{'border-red-600 text-red-600 dark:border-red-600 dark:text-red' : !!errors.password?.length , 'border-gray-300 text-gray-900 dark:border-gray-600 dark:text-white' : errors.password?.length <= 0}"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                />
-                            </div>
-                            <p v-show="!!errors.password?.length" class="text-sm text-red-600 dark:text-red-500">
-                                <span v-for="error,index in errors.email" :key="index">{{ error }}</span>
-                            </p>
+                            <InputField :errors="errors.password_confirmation" label="Confrim Password" type="password" placeholder="Confrim Password" :modelValue="user.password_confirmation??''" icon="check-double" @input="($event)=> user.password_confirmation = $event.target.value" />
                         </div>
-
-
-
                         <button type="submit" :disabled="!!isloading" class="w-full col-span-2 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Register
                         </button>
@@ -147,17 +74,20 @@
 </template>
 <script>
 import Alert from '../../components/alert.vue';
+import InputField from '../../components/InputField.vue';
+import SelectField from '../../components/selectField.vue';
 import { setAuthorization } from '../../library/general';
 
 export default {
     name: 'register',
-    components:{Alert},
+    components:{Alert,InputField,SelectField},
     data() {
         return {
             user: {},
             isloading:false,
             errors:[],
             message:null,
+            genderOptions:[{label:"Male",value:"Male"},{label:"Female", value:"Female"}],
         };
     },
     methods: {

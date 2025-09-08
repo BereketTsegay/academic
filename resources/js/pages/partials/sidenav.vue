@@ -16,7 +16,21 @@ export default {
                     label: 'Dashboard',
                     href:'/academia',
                     icon:'gauge'
-                }
+                },
+                {
+                    label: 'Authorization',
+                    icon:'unlock',
+                    subRoute:[
+                        {
+                            label: 'Roles',
+                            href:'/academia/auth/roles',
+                        },
+                        {
+                            label: 'Permissions',
+                            href:'/academia/auth/roles',
+                        },
+                    ]
+                },
             ]
         }
     },
