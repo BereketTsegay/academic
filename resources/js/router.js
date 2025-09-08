@@ -28,6 +28,22 @@ const router = new VueRouter.createRouter({
                     meta:{ requiresAuth:true},
                 },
                 {
+                    path: '/authorization/',
+                    name: 'authorization',
+                    component: ()=>import('./pages/authorization/index.vue'),
+                    meta:{ requiresAuth:true},
+                    children:[
+                        {
+                            path: 'roles',
+                            component: ()=>  import('./pages/authorization/roles.vue')
+                        },
+                        {
+                            path: 'permission',
+                            component: ()=>  import('./pages/authorization/permissions.vue')
+                        },
+                    ]
+                },
+                {
                     path: 'shipments',
                     name: 'shipments',
                     component: ()=>import('./pages/shippments/index.vue'),
@@ -97,7 +113,7 @@ const router = new VueRouter.createRouter({
                         // },
 
                     ],
-                   
+
                 },
                 {
                     path:'customers/',
@@ -117,6 +133,7 @@ const router = new VueRouter.createRouter({
                     path: 'register',
                     component: ()=>  import('./pages/auth/register.vue')
                 },
+
             ]
         },
     ]

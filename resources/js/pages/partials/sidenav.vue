@@ -23,11 +23,11 @@ export default {
                     subRoute:[
                         {
                             label: 'Roles',
-                            href:'/academia/auth/roles',
+                            href:'/academia/authorization/roles',
                         },
                         {
                             label: 'Permissions',
-                            href:'/academia/auth/roles',
+                            href:'/academia/authorization/permission',
                         },
                     ]
                 },
