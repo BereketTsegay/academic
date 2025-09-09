@@ -4,7 +4,7 @@
 
         <!-- Start coding here -->
         <div class="bg-white dark:bg-gray-800 overflow-hidden" style="position: relative;">
-            
+            <span class="text-lg text-gray-500 dark:text-white capitalize p-4">{{ title }}</span>
            <table-header :title="title" @add="$emit('add')"  @refresh="$emit('refresh')" @search="($event)=>$emit('search',$event)"></table-header>
             <div class="overflow-x-auto" v-if="data.length>0">
                 <Loader v-if="!!isLoading"></Loader>

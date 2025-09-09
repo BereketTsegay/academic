@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,9 +28,14 @@ Route::prefix('auth')->controller(AuthController::class)->group(function ($route
 })->middleware('api');
 
 Route::prefix('admin/roles')->controller(RoleController::class)->group(function($router){
-    Route::post('save','save');
+    Route::post('save','store');
     Route::get('get','index');
     Route::post('delete/{$id}','delete');
-});
+})->middleware('auth:api');
+Route::prefix('admin/permissions')->controller(PermissionController::class)->group(function($router){
+    Route::post('save','store');
+    Route::get('get','index');
+    Route::post('delete/{$id}','delete');
+})->middleware('auth:api');
 
 

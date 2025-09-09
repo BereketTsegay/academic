@@ -7,11 +7,11 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div class="grid gap-2 col-span-2">
                         <InputField :errors="errors.name??[]"
-                            label="Role Name"
+                            label="Permission Name"
                             type="text"
-                            placeholder="Role Name"
+                            placeholder="Permission Name"
                             :modelValue="record.name??''"
-                            icon="diagram-project"
+                            icon="hands-holding-circle"
                             @input="($event)=> record.name = $event.target.value">
                         </InputField>
                     </div>
@@ -36,7 +36,7 @@ export default {
  },
  methods: {
     save(){
-        axios.post('/api/admin/roles/save',this.record).then(res => {
+        axios.post('/api/admin/permissions/save',this.record).then(res => {
             this.$emit('updateData',res.data);
         }).catch(err => {
             this.errors = err.response.data.errors;
