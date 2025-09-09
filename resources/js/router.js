@@ -3,8 +3,8 @@ import * as VueRouter from 'vue-router'
 
 const router = new VueRouter.createRouter({
     history: VueRouter.createWebHistory(),
-    linkExactActiveClass: 'active',
-    linkActiveClass: 'active',
+    linkActiveClass: 'border-indigo-500',
+    linkExactActiveClass: 'border-indigo-700',
     routes: [
         {
             path: "/:catchAll(.*)",
@@ -28,7 +28,7 @@ const router = new VueRouter.createRouter({
                     meta:{ requiresAuth:true},
                 },
                 {
-                    path: '/authorization/',
+                    path: 'authorization/',
                     name: 'authorization',
                     component: ()=>import('./pages/authorization/index.vue'),
                     meta:{ requiresAuth:true},
