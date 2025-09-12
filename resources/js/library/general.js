@@ -29,3 +29,9 @@ export function initialize(store, router) {
 export function setAuthorization(token) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
 }
+export function capitalizeFirstLetter(str) {
+  if (typeof str !== 'string' || str.length === 0) {
+    return str; // Handle empty or non-string inputs
+  }
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}

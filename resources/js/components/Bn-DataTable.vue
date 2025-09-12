@@ -34,23 +34,15 @@
                                 </template>
                             </td>
                             <td class="px-4 py-3 flex items-center justify-end">
-                                <div :id="record.id" class="z-10 w-44 bg-white divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-
-                                        <span class="action">
-                                            <a v-on:click.prevent="$emit('edit',record)" class="py-2 px-4 hover:bg-gray-100 bg-white divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">Edit</a>
-                                        </span>
-                                        <span class="action">
-                                            <a v-on:click.prevent="$emit('delete',record)" class="py-2 px-4 hover:bg-gray-100 bg-white divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">Delete</a>
-                                        </span >
-                                        <span class="action">
-                                            <a v-on:click.prevent="$emit('view',record)" class="py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 bg-white divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">View</a>
-                                        </span>
-                                        <dropdown-menu></dropdown-menu>
-                                         <!-- <current-user></current-user> -->
-
-
-
-                                </div>
+                                
+                                <div class="inline-flex rounded-md shadow-xs" role="group">
+                                    <button v-for="action,index in [{event:'edit',icon:'pen'},{event:'delete',icon:'trash'},{event:'view',icon:'eye'}]" 
+                                    :key="index" type="button" 
+                                    @click="$emit(action.event,record)"
+                                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+                                        <FaIcon v-if="!!action.icon" :class="{'text-red-500':action.event=='delete'}" :iconName="action.icon"></FaIcon>
+                                    </button>
+                                    </div>                       
                             </td>
                         </tr>
                     </tbody>
@@ -68,13 +60,18 @@ import tableFooter from './tableFooter.vue';
 import Loader from './loader.vue';
 import nodataFound from './nodataFound.vue';
 import dropdownMenu from './dropdownMenu.vue';
-import currentUser from '../pages/partials/currentUser.vue';
+
+import { capitalizeFirstLetter } from '../library/general';
+import FaIcon from './faIcon.vue';
 
 export default {
     name:'dataTable',
     props:{data:{ type : Array, required:true, default:[]},columns:Array,title:String,pagination:Object,isLoading:Boolean,dropdown:false},
-    components:{ tableHeader, tableFooter, Loader , nodataFound, dropdownMenu, currentUser},
+    components:{ tableHeader, tableFooter, Loader , nodataFound, dropdownMenu, FaIcon},
     methods: {
+        capitalize(word){
+            return capitalizeFirstLetter(word)
+        },
         getClass(column,rec){
 
             var result="";
