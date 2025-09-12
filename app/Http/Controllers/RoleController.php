@@ -14,7 +14,7 @@ class RoleController extends Controller
     public function index(Request $request)
     {
        return  Role::latest()
-            ->paginate(6)
+            ->paginate(2)
             ->withQueryString();
     }
 

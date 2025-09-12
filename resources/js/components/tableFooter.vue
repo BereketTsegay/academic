@@ -15,8 +15,10 @@
                             </svg>
                         </a>
                     </li>
-                    <li v-for="index in paginate.last_page-1" :key="index">
-                        <a @click.prevent="$emit('paginate',index)" :class="{'active cursor-not-allowed':!!index!==paginate.current_page}" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+                    <li v-for="index in paginate.last_page" :key="index">
+                        <a @click.prevent="$emit('paginate',index)" :class="{'active cursor-not-allowed': index==paginate.current_page}" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            {{ index }}
+                        </a>
                     </li>
 
                     <li>
