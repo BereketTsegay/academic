@@ -40,7 +40,7 @@ Route::prefix('admin/permissions')->controller(PermissionController::class)->gro
     Route::get('get','index');
     Route::post('delete/{$id}','delete');
 })->middleware('auth:api');
-Route::resource('admin/users', UserController::class)->middleware('auth:api');
+// Route::resource('admin/users', UserController::class)->middleware('auth:api');
 Route::get('admin/users/search', [UserController::class,'search'])->middleware('auth:api');
 
 

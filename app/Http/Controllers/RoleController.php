@@ -18,7 +18,7 @@ class RoleController extends Controller
     }
 
     public function show(Request $request) {
-        return response()->json(Role::findById($request->id)->with('users')->get());
+        return response()->json(Role::whereId($request->id)->with('users')->first());
     }
 
     public function rollAssgn(Request $request) {
