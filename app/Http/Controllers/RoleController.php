@@ -11,11 +11,25 @@ class RoleController extends Controller
     /**
      * Display a Role of the resource.
      */
-    public function index(Request $request)
-    {
-       return  Role::latest()
+    public function index(Request $request){
+       return  Role::withCount('users')->latest()
             ->paginate(2)
             ->withQueryString();
+    }
+
+    public function show(Request $request) {
+        return response()->json(Role::findById($request->id)->with('users')->get());
+    }
+
+    public function rollAssgn(Request $request) {
+        return response()->json($request->all());
+        // $role = Role::findById($request->role_id)->first();
+        // if(!!$role) {
+        //     $role->syncPermissions($request->permissions);
+        //     return response()->json(['message'=>'permissions assigned successfuly'],200);
+        // }
+        // return response()->json(['message'=>'not assigned'],500);
+
     }
 
     /**
@@ -32,8 +46,8 @@ class RoleController extends Controller
         return response()->json($role);
     }
 
-   
-   
+
+
 
     /**
      * Remove the specified resource from storage.

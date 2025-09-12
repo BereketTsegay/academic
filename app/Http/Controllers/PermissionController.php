@@ -13,7 +13,7 @@ class PermissionController extends Controller
      */
     public function index(Request $request)
     {
-       return  Permission::latest()->paginate(6)->withQueryString();
+       return  Permission::withCount('users')->latest()->paginate(6)->withQueryString();
     }
 
     /**
@@ -30,8 +30,8 @@ class PermissionController extends Controller
         return response()->json($permission);
     }
 
-   
-   
+
+
 
     /**
      * Remove the specified resource from storage.

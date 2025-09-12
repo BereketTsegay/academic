@@ -28,9 +28,6 @@
                     </router-link>
                 </template>
             </li>
-
-
-
     </ul>
 </template>
 <script>

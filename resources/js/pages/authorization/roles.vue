@@ -15,18 +15,24 @@
        <BnModal v-if="!!createToggle" :toggle="createToggle" @close="createToggle= !createToggle" title="Roles Form">
             <RolesForm :record="selectedData" @updateData="($event)=>updated($event)"></RolesForm>
        </BnModal>
+       <BnModal v-if="viewRole" :toggle="viewRole" @close="viewRole= !viewRole" :title="`Role - ${selectedData?.name} `">
+            <role-view :id="selectedData.id"></role-view>
+       </BnModal>
+
     </div>
 </template>
 <script>
 import BnDataTable from '../../components/Bn-DataTable.vue';
 import BnModal from '../../components/Bn-Modal.vue';
 import RolesForm from './forms/rolesForm.vue';
+import roleView from './views/roleView.vue';
 
 export default {
     components:{
         BnDataTable,
         BnModal,
         RolesForm,
+        roleView,
     },
     data() {
         return {
@@ -38,14 +44,15 @@ export default {
             deleteModal:false,
             showView:false,
             message:'',
+            viewRole:false,
             columns:[
                 {
                     name:'Role',
                     field:'name',
                 },
                 {
-                    name:'Role Members',
-                    field:'booking_number',
+                    name:'Members',
+                    field:'users_count',
                 },
 
             ],
@@ -98,7 +105,8 @@ export default {
             console.log(data);
         },
         view(data){
-            console.log(data);
+            this.selectedData = Object.assign({},data);
+            this.viewRole = true;
         }
         },
 }

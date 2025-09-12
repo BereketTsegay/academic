@@ -34,15 +34,15 @@
                                 </template>
                             </td>
                             <td class="px-4 py-3 flex items-center justify-end">
-                                
+
                                 <div class="inline-flex rounded-md shadow-xs" role="group">
-                                    <button v-for="action,index in [{event:'edit',icon:'pen'},{event:'delete',icon:'trash'},{event:'view',icon:'eye'}]" 
-                                    :key="index" type="button" 
-                                    @click="$emit(action.event,record)"
+                                    <button v-for="action,index in [{event:'edit',icon:'pen'},{event:'delete',icon:'trash'},{event:'view',icon:'eye'}]"
+                                    :key="index" type="button"
+                                    @click="checkEvent(action,record)"
                                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
                                         <FaIcon v-if="!!action.icon" :class="{'text-red-500':action.event=='delete'}" :iconName="action.icon"></FaIcon>
                                     </button>
-                                    </div>                       
+                                    </div>
                             </td>
                         </tr>
                     </tbody>
@@ -51,7 +51,7 @@
             <nodataFound v-else @add="$emit('add')"></nodataFound>
             <table-footer :paginate="pagination" @paginate="($event)=>$emit('paginate',$event)"></table-footer>
         </div>
-
+        <Confrim message="record" v-if="deleteModal" @close="deleteModal=false" @confirmed="$emit('delete',record)"></Confrim>
     </section>
 </template>
 <script>
@@ -63,11 +63,17 @@ import dropdownMenu from './dropdownMenu.vue';
 
 import { capitalizeFirstLetter } from '../library/general';
 import FaIcon from './faIcon.vue';
+import Confrim from './confrim.vue';
 
 export default {
     name:'dataTable',
     props:{data:{ type : Array, required:true, default:[]},columns:Array,title:String,pagination:Object,isLoading:Boolean,dropdown:false},
-    components:{ tableHeader, tableFooter, Loader , nodataFound, dropdownMenu, FaIcon},
+    components:{ tableHeader, tableFooter, Loader , nodataFound, dropdownMenu, FaIcon, Confrim},
+    data() {
+        return {
+            deleteModal:false,
+        }
+    },
     methods: {
         capitalize(word){
             return capitalizeFirstLetter(word)
@@ -86,6 +92,13 @@ export default {
             }
             return result;
 
+        },
+        checkEvent(action,rec){
+            if(action.event == 'delete') {
+                this.deleteModal=true;
+                return;
+            }
+            this.$emit(action.event,rec);
         },
         getRandomInt(min, max) {
             const minCeiled = Math.ceil(min);

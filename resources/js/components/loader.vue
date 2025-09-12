@@ -1,5 +1,5 @@
 <template>
-   <div aria-label="Loading..." role="status" class="flex items-center justify-center min-h-full w-full loading">
+   <div aria-label="Loading..." role="status" class="flex items-center bg-auto justify-center min-h-full w-full loading">
     <svg class="h-20 w-20 animate-spin stroke-gray-500" viewBox="0 0 256 256">
         <line x1="128" y1="32" x2="128" y2="64" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
         <line x1="195.9" y1="60.1" x2="173.3" y2="82.7" stroke-linecap="round" stroke-linejoin="round"
@@ -18,17 +18,17 @@
     </svg>
     <span class="text-4xl font-medium text-gray-500">Loading...</span>
 </div>
-  
+
 </template>
 <script>
 export default {
-   name:'Loader',  
+   name:'Loader',
 }
 </script>
 <style lang="css">
 .loading{
     position: absolute;
     z-index: 10000000;
-    background: rgba(244, 244, 244, 1);
+
 }
 </style>

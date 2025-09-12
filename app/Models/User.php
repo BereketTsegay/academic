@@ -4,8 +4,10 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Models\Role;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -57,4 +59,14 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+   /**
+    * The roles that belong to the User
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    */
+   public function roles(): BelongsToMany
+   {
+       return $this->belongsToMany(Role::class, 'role_user_table', 'user_id', 'role_id');
+   }
 }
