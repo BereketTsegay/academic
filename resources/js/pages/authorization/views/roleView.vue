@@ -9,12 +9,13 @@
             <input @input="search()" type="text" v-model="q" id="table-search" class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
         </div>
     </div>
+    <Alert :message="message" v-if="!!message"></Alert>
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="p-4">
                     <div class="flex items-center">
-                        <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="checkbox-all-search" @change="(e)=>selectAll(e.target.checked )" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="checkbox-all-search" class="sr-only">checkbox</label>
                     </div>
                 </th>
@@ -23,6 +24,7 @@
                 </th>
                 <th scope="col" class="px-6 py-3">
                     <fa-icon icon="cogs" class="w-4 h-4"></fa-icon>
+                    <button :disabled="!!this.isLoading" @click="updateRole">Save Changes</button>
                 </th>
             </tr>
         </thead>
@@ -30,7 +32,7 @@
             <tr v-for="user,index in roles.users" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <td class="w-4 p-4">
                     <div class="flex items-center">
-                        <input id="checkbox-table-search-1" @change="changed(user.id)" :checked="inroled.indexOf(user.id)" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="checkbox-table-search-1" @change="changed(user.id)" :checked="inroled.indexOf(user.id) > -1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
                     </div>
                 </td>
@@ -53,17 +55,19 @@
 
 </template>
 <script>
-import axios from 'axios';
 import faIcon from '../../../components/faIcon.vue';
+import Alert from '../../../components/alert.vue';
+
 export default {
     props:{id:Number || String},
-    components:{faIcon},
+    components:{faIcon,Alert},
 data() {
         return {
             roles:[],
             isLoading : false,
             inroled:[],
             q:'',
+            message:null,
         }
     },
  mounted(){
@@ -79,18 +83,35 @@ data() {
             }).catch(err => alert(err.responce))
             .finally(()=>this.isLoading=false);
         },
+        updateRole(){
+            this.isLoading = true;
+            axios.post('/api/admin/roles/assign/'+this.id,{ users :  this.inroled})
+            .then(res=>{
+                console.log(res.data);
+            }).catch(err => this.message= err.response.message)
+            .finally(()=>this.isLoading=false);
+        },
         search(){
             this.isLoading = true;
             if(this.q.length>2 || this.q.length==0){
                 axios.get('/api/admin/users/search?&q='+this.q)
                 .then(res=>{
                     this.roles.users = res.data;
-                }).catch(err => alert(err.responce))
+                }).catch(err => this.message=err.response.data.message)
                 .finally(()=>this.isLoading=false);
             }
         },
         changed(id){
-            console.log(id);
+            let indx = this.inroled.indexOf(id)
+            if(indx > -1) {
+                this.inroled.splice(indx,1);
+                return
+            }
+            this.inroled.push(id);
+        },
+        selectAll(toggle){
+            if(toggle) this.inroled = this.roles.users?.map(r=>r.id);
+            else this.inroled = [];
         }
     },
 }
