@@ -42,5 +42,6 @@ Route::prefix('admin/permissions')->controller(PermissionController::class)->gro
 })->middleware('auth:api');
 // Route::resource('admin/users', UserController::class)->middleware('auth:api');
 Route::get('admin/users/search', [UserController::class,'search'])->middleware('auth:api');
+Route::get('admin/users', [UserController::class,'index'])->middleware('auth:api');
 
 

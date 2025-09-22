@@ -12,7 +12,9 @@ class UserController extends Controller
      */
     public function index()
     {
-
+          return  User::with(['roles','permissions'])->latest()
+            ->paginate(2)
+            ->withQueryString();
     }
 
     /**

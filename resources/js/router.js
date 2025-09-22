@@ -38,8 +38,8 @@ const router = new VueRouter.createRouter({
                             component: ()=>  import('./pages/authorization/roles.vue')
                         },
                         {
-                            path: 'permission',
-                            component: ()=>  import('./pages/authorization/permissions.vue')
+                            path: 'users',
+                            component: ()=>  import('./pages/authorization/users.vue')
                         },
                     ]
                 },
