@@ -32,7 +32,7 @@
                         <p v-if="!!has_error.type" id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">Error!</span> {{ has_error.type }}.</p>
                     </div>
                     <div class="col-span-2">
-                        <input :checked="!!category.is_active" id="type-checkbox" :value="!!category.is_active" v-model='category.is_active' type="checkbox" 
+                        <input :checked="!!category.is_active" id="type-checkbox" :value="!!category.is_active" v-model='category.is_active' type="checkbox"
                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="type-checkbox" class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Enabled / Diabled</label>
 
@@ -52,10 +52,9 @@
             </form>
 </template>
 <script>
-import { Form, Field } from 'vee-validate';
+
 export default {
     props:['category'],
-    components:{Form,Field},
     data() {
         return {
             has_error:{},

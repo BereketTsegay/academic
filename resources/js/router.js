@@ -44,6 +44,30 @@ const router = new VueRouter.createRouter({
                     ]
                 },
                 {
+                    path: 'school/',
+                    name: 'school',
+                    component: ()=>import('./pages/Academia/index.vue'),
+                    meta:{ requiresAuth:true},
+                    children:[
+                        {
+                            path: 'departments',
+                            component: ()=>  import('./pages/Academia/departments.vue')
+                        },
+                        {
+                            path: 'library',
+                            component: ()=>  import('./pages/Academia/library.vue')
+                        },
+                        {
+                            path: 'subjects',
+                            component: ()=>  import('./pages/Academia/subjects.vue')
+                        },
+                        {
+                            path: 'classrooms',
+                            component: ()=>  import('./pages/Academia/classRooms.vue')
+                        },
+                    ]
+                },
+                {
                     path: 'shipments',
                     name: 'shipments',
                     component: ()=>import('./pages/shippments/index.vue'),
