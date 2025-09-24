@@ -32,15 +32,16 @@ Route::prefix('admin/roles')->controller(RoleController::class)->group(function(
     Route::post('save','store');
     Route::get('get','index');
     Route::get('show','show');
-    Route::get('assign','rollAssgn');
-    Route::delete('delete/{$id}','delete');
+    Route::post('assign/{id}','syncRole');
+    Route::delete('delete/{id}','delete');
 })->middleware('auth:api');
 Route::prefix('admin/permissions')->controller(PermissionController::class)->group(function($router){
     Route::post('save','store');
     Route::get('get','index');
-    Route::post('delete/{$id}','delete');
+    Route::post('delete/{id}','delete');
 })->middleware('auth:api');
-Route::resource('admin/users', UserController::class)->middleware('auth:api');
+// Route::resource('admin/users', UserController::class)->middleware('auth:api');
 Route::get('admin/users/search', [UserController::class,'search'])->middleware('auth:api');
+Route::get('admin/users', [UserController::class,'index'])->middleware('auth:api');
 
 

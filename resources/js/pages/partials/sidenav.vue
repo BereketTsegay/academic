@@ -26,8 +26,8 @@ export default {
                             href:'/academia/authorization/roles',
                         },
                         {
-                            label: 'Permissions',
-                            href:'/academia/authorization/permission',
+                            label: 'users',
+                            href:'/academia/authorization/users',
                         },
                     ]
                 },

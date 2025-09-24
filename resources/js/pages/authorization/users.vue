@@ -1,7 +1,7 @@
 <template>
     <div>
        <BnDataTable  
-       title="Permissions"
+       title="Users"
        :isLoading="isLoading"
        @paginate="($event)=>getData(null,$event)"
        :pagination="paginationdata"
@@ -45,8 +45,8 @@ export default {
                     field:'name',
                 },
                 {
-                    name:'Allowed Members',
-                    field:'user_count',
+                    name:'role',
+                    field:'',
                 },
 
             ],
@@ -70,7 +70,7 @@ export default {
         },
             getData(query='',page=1){
                 this.isLoading= true;
-                var request_str = '/api/admin/permissions/get?page='+page;
+                var request_str = '/api/admin/users?page='+page;
                 if(!!query) {request_str= request_str +'&query='+query;}
                 axios
                 .get(request_str)

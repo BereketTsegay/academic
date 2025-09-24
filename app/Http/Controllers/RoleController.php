@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RoleRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -18,7 +19,7 @@ class RoleController extends Controller
     }
 
     public function show(Request $request) {
-        return response()->json(Role::findById($request->id)->with('users')->get());
+        return response()->json(Role::whereId($request->id)->with('users')->first());
     }
 
     public function rollAssgn(Request $request) {
@@ -37,16 +38,28 @@ class RoleController extends Controller
      */
     public function store(RoleRequest $request)
     {
-        $role = $request->id? Role::findById($request->id)->first() : new Role();
+        $role = $request->id? Role::whereId($request->id)->first() : new Role();
 
         $role->fill($request->validated());
         $role->save();
         $role->refresh();
+        $role->users_count=$role->users()->count();
 
         return response()->json($role);
     }
 
+  public function syncRole(Request $request, string $id) {
+    //get user
 
+    $role=Role::whereId($id)->first();
+
+    if($role) $role->users()->sync($request->users);
+
+    $role->refresh();
+
+    return response()->json($role->users());
+
+  }
 
 
     /**
