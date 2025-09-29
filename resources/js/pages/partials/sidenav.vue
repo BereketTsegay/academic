@@ -31,6 +31,28 @@ export default {
                         },
                     ]
                 },
+                {
+                    label: 'Academia',
+                    icon:'user-graduate',
+                    subRoute:[
+                        {
+                            label: 'Departments',
+                            href:'/academia/school/departments',
+                        },
+                        {
+                            label: 'Subjects',
+                            href:'/academia/school/subjects',
+                        },
+                        {
+                            label: 'Library',
+                            href:'/academia/school/library',
+                        },
+                        {
+                            label:' Classrooms',
+                            href:'/academia/school/classrooms',
+                        },
+                    ]
+                },
             ]
         }
     },
