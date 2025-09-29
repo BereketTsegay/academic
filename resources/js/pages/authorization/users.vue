@@ -13,21 +13,21 @@
        @edit="($event)=>edit($event)"
        @delete="($event)=>destroy($event)"
        @view="($event)=>view($event)"></BnDataTable>
-       <BnModal v-if="!!createToggle" :toggle="createToggle" @close="createToggle= !createToggle" title="Permission Form">
-            <PermissionForm :record="selectedData" @updateData="($event)=>updated($event)"></PermissionForm>
+       <BnModal v-if="!!createToggle" :toggle="createToggle" @close="createToggle=false" title="User Update form">
+            <userForm :user="selectedData" @save="($event)=>updated($event)"></userForm>
        </BnModal>
     </div>
 </template>
 <script>
 import BnDataTable from '../../components/Bn-DataTable.vue';
 import BnModal from '../../components/Bn-Modal.vue';
-import PermissionForm from './forms/permissionForm.vue';
+import userForm from './forms/userForm.vue';
 
 export default {
     components:{
         BnDataTable,
         BnModal,
-        PermissionForm,
+        userForm,
     },
     data() {
         return {
@@ -41,12 +41,30 @@ export default {
             message:'',
             columns:[
                 {
-                    name:'Permission',
+                    name:'Id',
+                    field:'id',
+                },
+                {
+                    name:'full Name',
                     field:'name',
                 },
                 {
-                    name:'role',
-                    field:'',
+                    name: 'Role(s)',
+                    field: 'roles',
+                    options:{
+                        type: 'Array',
+                        dataset : 'roles',
+                        display_field:'name',
+                    }
+                },
+                {
+                    name: 'Permission(s)',
+                    field: 'permissions',
+                    options:{
+                        type: 'Array',
+                        dataset : 'permissions',
+                        display_field:'name',
+                    }
                 },
 
             ],

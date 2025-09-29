@@ -31,6 +31,7 @@ Route::prefix('auth')->controller(AuthController::class)->group(function ($route
 Route::prefix('admin/roles')->controller(RoleController::class)->group(function($router){
     Route::post('save','store');
     Route::get('get','index');
+    Route::get('roles','roles');
     Route::get('show','show');
     Route::post('assign/{id}','syncRole');
     Route::delete('delete/{id}','delete');
@@ -43,5 +44,6 @@ Route::prefix('admin/permissions')->controller(PermissionController::class)->gro
 // Route::resource('admin/users', UserController::class)->middleware('auth:api');
 Route::get('admin/users/search', [UserController::class,'search'])->middleware('auth:api');
 Route::get('admin/users', [UserController::class,'index'])->middleware('auth:api');
+Route::post('admin/users/store', [UserController::class,'store'])->middleware('auth:api');
 
 
