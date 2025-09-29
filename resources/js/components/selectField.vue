@@ -17,7 +17,7 @@
                 class="bg-gray-50 border   text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700  dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
 >
                     <option selected>Select</option>
-                    <option v-for="(option,index) in options" :key="index" :value="options.value">{{option.label}}</option>
+                    <option v-for="(option,index) in options" :key="index" :value="!!optionValue?option[optionValue]:option.value">{{!!optionLabel? option[optionLabel] : option.label}}</option>
                 </select>
                 
         </div>
@@ -29,6 +29,8 @@
 <script>
 export default {
     props:{
+        optionLabel : String,
+        optionValue : String,
         modelValue:{
             type: String || Number,
             required : true,

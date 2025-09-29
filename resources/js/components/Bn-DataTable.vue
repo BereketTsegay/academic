@@ -22,11 +22,16 @@
                         <tr class="border-b dark:border-gray-700" v-for="(record,ind) in data" :key="record.created_at">
                             <td v-for="(column,index) in columns" :key="index+ind" class="px-4 py-3">
                                 <template v-if="!!column.options">
-                                    <div>
+                                    <div v-if="Array.isArray(record[column.options?.dataset])">
+                                        <tableArraydisplay :dataset="record[column.options?.dataset]" :options="column.options"></tableArraydisplay>
+                                    </div>
+                                    <div v-else-if="record[column.options?.component]">
+                                        <component :is='column.options?.component'></component>
+                                    </div>
+                                    <div v-else>
                                         <div class="h-21 rounded-md min-w-10" :class="getClass(column,record)">
                                            {{ getSwitched(record,column)  }}
                                         </div>
-
                                     </div>
                                 </template>
                                 <template v-else>
@@ -64,11 +69,12 @@ import dropdownMenu from './dropdownMenu.vue';
 import { capitalizeFirstLetter } from '../library/general';
 import FaIcon from './faIcon.vue';
 import Confrim from './confrim.vue';
+import tableArraydisplay from './table-arraydisplay.vue';
 
 export default {
     name:'dataTable',
     props:{data:{ type : Array, required:true, default:[]},columns:Array,title:String,pagination:Object,isLoading:Boolean,dropdown:false},
-    components:{ tableHeader, tableFooter, Loader , nodataFound, dropdownMenu, FaIcon, Confrim},
+    components:{ tableHeader, tableFooter, Loader , nodataFound, dropdownMenu, FaIcon, Confrim, tableArraydisplay},
     data() {
         return {
             deleteModal:false,

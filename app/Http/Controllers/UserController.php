@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRegister;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -20,9 +21,15 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRegister $request)
     {
-        //
+        $user = User::whereId($request->id)->first();
+        if(!$user) return response()->json('Pls register new',403);
+
+        $user->fill($request->validated());
+        $user->save();
+
+        return response()->json($user,200);
     }
 
     /**

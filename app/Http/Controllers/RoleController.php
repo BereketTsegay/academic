@@ -18,6 +18,9 @@ class RoleController extends Controller
             ->withQueryString();
     }
 
+    public function roles()  {
+        return response()->json(Role::select('id','name')->orderBy('name')->get());
+    }
     public function show(Request $request) {
         return response()->json(Role::whereId($request->id)->with('users')->first());
     }

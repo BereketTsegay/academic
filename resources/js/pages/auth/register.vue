@@ -9,21 +9,6 @@
               <form @submit.prevent="authenticate" class="flex flex-col gap-6">
                     <div class="grid grid-cols-2 gap-4">
                         <div class="grid gap-2">
-                            <!-- <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Full Name
-                            </label>
-                            <div>
-                                <input
-                                v-model="user.name"
-                                placeholder="Full Name"
-                                :class="{'border-red-600 text-red-600 dark:border-red-600 dark:text-red' : !!errors.name?.length , 'border-gray-300 text-gray-900 dark:border-gray-600 dark:text-white' : errors.name?.length <= 0}"
-                                class="bg-gray-50 border   text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700  dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                />
-
-                            </div>
-                             <p v-show="!!errors.name?.length" class="text-sm text-red-600 dark:text-red-500">
-                                <span v-for="error,index in errors.name" :key="index">{{ error }}</span>
-                            </p> -->
                             <InputField :errors="errors.name" label="Full Name" type="text" placeholder="Full Name" :modelValue="user.name??''" icon="i-cursor" @input="($event)=> user.name = $event.target.value" />
                         </div>
                         <div class="grid gap-2">
@@ -66,7 +51,7 @@
                         Already have an account?
                         <router-link to="auth/login" class="underline underline-offset-4" :tabindex="6">Log in</router-link>
                     </div>
-                </form>
+              </form>
           </div>
       </div>
 
