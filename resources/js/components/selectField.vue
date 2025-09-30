@@ -11,6 +11,7 @@
                 </div>
 
                 <select :value.sync="modelValue"
+                :multiple="isMultiple"
                 @input="$emit('input')"
                 :placeholder="placeholder"
                 :class="{'border-red-600 text-red-600 dark:border-red-600 dark:text-red' : !!errors.length , 'border-gray-300 text-gray-900 dark:border-gray-600 dark:text-white' : errors.length <= 0}"
@@ -19,7 +20,7 @@
                     <option selected>Select</option>
                     <option v-for="(option,index) in options" :key="index" :value="!!optionValue?option[optionValue]:option.value">{{!!optionLabel? option[optionLabel] : option.label}}</option>
                 </select>
-                
+
         </div>
             <p v-show="!!errors.length" class="text-sm text-red-600 dark:text-red-500">
             <span v-for="error,index in errors" :key="index">{{ error }}</span>
@@ -31,6 +32,11 @@ export default {
     props:{
         optionLabel : String,
         optionValue : String,
+        isMultiple:{
+            type: Boolean,
+            default : false,
+            required : false,
+        },
         modelValue:{
             type: String || Number,
             required : true,
@@ -60,5 +66,5 @@ export default {
 }
 </script>
 <style lang="">
-    
+
 </style>

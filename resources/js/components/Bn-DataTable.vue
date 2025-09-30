@@ -25,7 +25,7 @@
                                     <div v-if="Array.isArray(record[column.options?.dataset])">
                                         <tableArraydisplay :dataset="record[column.options?.dataset]" :options="column.options"></tableArraydisplay>
                                     </div>
-                                    <div v-else-if="record[column.options?.component]">
+                                    <div v-else-if="!!column.options?.component">
                                         <component :is='column.options?.component'></component>
                                     </div>
                                     <div v-else>
@@ -47,7 +47,7 @@
                                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
                                         <FaIcon v-if="!!action.icon" :class="{'text-red-500':action.event=='delete'}" :iconName="action.icon"></FaIcon>
                                     </button>
-                                    </div>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

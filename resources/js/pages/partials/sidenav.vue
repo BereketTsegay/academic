@@ -36,19 +36,19 @@ export default {
                     icon:'user-graduate',
                     subRoute:[
                         {
-                            label: 'Departments',
+                            label:'Departments',
                             href:'/academia/school/departments',
                         },
                         {
-                            label: 'Subjects',
+                            label:'Subjects',
                             href:'/academia/school/subjects',
                         },
                         {
-                            label: 'Library',
+                            label:'Library',
                             href:'/academia/school/library',
                         },
                         {
-                            label:' Classrooms',
+                            label:'Classrooms',
                             href:'/academia/school/classrooms',
                         },
                     ]

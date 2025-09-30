@@ -1,6 +1,6 @@
 <template>
     <div>
-       <BnDataTable  
+       <BnDataTable
        title="Users"
        :isLoading="isLoading"
        @paginate="($event)=>getData(null,$event)"
@@ -13,21 +13,23 @@
        @edit="($event)=>edit($event)"
        @delete="($event)=>destroy($event)"
        @view="($event)=>view($event)"></BnDataTable>
-       <BnModal v-if="!!createToggle" :toggle="createToggle" @close="createToggle=false" title="User Update form">
+       <!-- <BnModal v-if="!!createToggle" :toggle="createToggle" @close="createToggle=false" title="User Update form">
             <userForm :user="selectedData" @save="($event)=>updated($event)"></userForm>
-       </BnModal>
+       </BnModal> -->
     </div>
 </template>
 <script>
 import BnDataTable from '../../components/Bn-DataTable.vue';
 import BnModal from '../../components/Bn-Modal.vue';
 import userForm from './forms/userForm.vue';
+import userRoleUpdate from '../../components/userRoleUpdate.vue';
 
 export default {
     components:{
         BnDataTable,
         BnModal,
         userForm,
+        userRoleUpdate,
     },
     data() {
         return {
