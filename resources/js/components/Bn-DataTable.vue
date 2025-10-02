@@ -26,7 +26,7 @@
                                         <tableArraydisplay :dataset="record[column.options?.dataset]" :options="column.options"></tableArraydisplay>
                                     </div>
                                     <div v-else-if="!!column.options?.component">
-                                        <component :is='column.options?.component'></component>
+                                        <component :is='column.options?.component' v-bind="{user : record}"></component>
                                     </div>
                                     <div v-else>
                                         <div class="h-21 rounded-md min-w-10" :class="getClass(column,record)">
@@ -65,6 +65,7 @@ import tableFooter from './tableFooter.vue';
 import Loader from './loader.vue';
 import nodataFound from './nodataFound.vue';
 import dropdownMenu from './dropdownMenu.vue';
+import userRoleUpdate from './userRoleUpdate.vue';
 
 import { capitalizeFirstLetter } from '../library/general';
 import FaIcon from './faIcon.vue';
@@ -74,7 +75,7 @@ import tableArraydisplay from './table-arraydisplay.vue';
 export default {
     name:'dataTable',
     props:{data:{ type : Array, required:true, default:[]},columns:Array,title:String,pagination:Object,isLoading:Boolean,dropdown:false},
-    components:{ tableHeader, tableFooter, Loader , nodataFound, dropdownMenu, FaIcon, Confrim, tableArraydisplay},
+    components:{ tableHeader, tableFooter, Loader , nodataFound, dropdownMenu, FaIcon, Confrim, tableArraydisplay, userRoleUpdate},
     data() {
         return {
             deleteModal:false,

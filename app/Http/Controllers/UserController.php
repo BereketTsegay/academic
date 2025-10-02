@@ -50,6 +50,16 @@ class UserController extends Controller
         return response()->json($query->get());
     }
 
+    public function asignRole(Request $request,String $id) {
+        $user=User::whereId($id)->first();
+
+        if($user) $user->roles()->sync($request->roles);
+
+        $user->refresh();
+
+        return response()->json($user->users());
+    }
+
 
     /**
      * Remove the specified resource from storage.

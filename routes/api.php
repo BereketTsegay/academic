@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -45,5 +46,14 @@ Route::prefix('admin/permissions')->controller(PermissionController::class)->gro
 Route::get('admin/users/search', [UserController::class,'search'])->middleware('auth:api');
 Route::get('admin/users', [UserController::class,'index'])->middleware('auth:api');
 Route::post('admin/users/store', [UserController::class,'store'])->middleware('auth:api');
+Route::post('admin/users/asignRole/{id}', [UserController::class,'asignRole'])->middleware('auth:api');
+
+Route::prefix('user/notifications')->middleware('auth:api')->controller(NotificationController::class)->group(function () {
+    Route::get('/',  'index');
+    Route::post('/{id}/read',  'markAsRead');
+    Route::post('/read-all',  'markAllAsRead');
+    Route::delete('/{id}',  'destroy');
+    Route::delete('/',  'clearAll');
+});
 
 

@@ -38,7 +38,7 @@ export default {
             required : false,
         },
         modelValue:{
-            type: String || Number,
+            type: [String,Array,Number],
             required : true,
         },
         placeholder:{

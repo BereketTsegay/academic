@@ -22,14 +22,13 @@
 import BnDataTable from '../../components/Bn-DataTable.vue';
 import BnModal from '../../components/Bn-Modal.vue';
 import userForm from './forms/userForm.vue';
-import userRoleUpdate from '../../components/userRoleUpdate.vue';
+
 
 export default {
     components:{
         BnDataTable,
         BnModal,
         userForm,
-        userRoleUpdate,
     },
     data() {
         return {
@@ -54,9 +53,7 @@ export default {
                     name: 'Role(s)',
                     field: 'roles',
                     options:{
-                        type: 'Array',
-                        dataset : 'roles',
-                        display_field:'name',
+                        component: 'userRoleUpdate',
                     }
                 },
                 {

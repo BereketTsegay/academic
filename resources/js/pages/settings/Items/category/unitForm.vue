@@ -27,7 +27,6 @@
             </form>
 </template>
 <script>
-import { Form, Field } from 'vee-validate';
 export default {
     props:['unit'],
     components:{Form,Field},
